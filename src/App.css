@@ -88,19 +88,20 @@ button:active {
   letter-spacing: 2px;
 }
 
-.weather__key {
+.scheduled__key {
   color: #0bae02;
-  border-bottom: solid 2px rgba(211, 32, 32, 0.06);
-  padding: 20px 0 20px 0;
-  font-weight: 400;
+  /* border-bottom: solid 2px rgba(211, 32, 32, 0.06); */
+  padding: 20px 40 20px 0;
+  font-weight: 1000;
+  font-size: 20px;
 }
 
-.weather__key:last-child {
+.scheduled__key:last-child {
   border: 0;
 }
 
-.weather__value {
-  color: #fff;
+.scheduled__value {
+  color: rgb(0, 0, 0);
   font-weight: 200;
 }
 

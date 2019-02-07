@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import Trains from "./Trains";
-import Map2 from "./Map2";
+import Trains from "./Components/Trains";
+import Map2 from "./Components/Map2";
+import RouteTitle from "./Components/RouteTitle";
 
 
 
@@ -230,7 +231,14 @@ longNameToShortName = (_allStationsNames, longName) => {
         <button onClick={this.getTrainData}>HAE</button>
 
         {/* haetaan departure statesta. */}
-
+        <RouteTitle
+          data={haku} // mappays
+          allStationsNames={this.state.allStationsNames}// Lähtöasema
+          shortNameToLongName={this.shortNameToLongName} // muuntaa lyhenteet pitkiksi nimiksi
+          departureWeather={this.state.departureWeather} // lähtöaseman sää
+          arrivalWeather={this.state.arrivalWeather}/>
+        
+        
         <Trains 
         data={haku} // mappays
         allStationsNames={this.state.allStationsNames}// Lähtöasema

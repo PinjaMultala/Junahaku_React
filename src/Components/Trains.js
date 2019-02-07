@@ -12,7 +12,9 @@ class Trains extends Component {
       return (
         <div>
           <p>
-            Departure Station: {this.props.shortNameToLongName(this.props.allStationsNames, joinInfo.departure.stationShortCode)} <br/>
+          <p className="scheduled__key">{this.props.shortNameToLongName(this.props.allStationsNames, joinInfo.departure.stationShortCode)} --->
+           {this.props.shortNameToLongName(this.props.allStationsNames, joinInfo.arrival.stationShortCode)}  </p><br/>
+           
             Departure time: {moment(joinInfo.departure.scheduledTime).calendar()} <br/>
             Weather: {this.props.departureWeather.main.temp}<br/>
             Train number: {joinInfo.departure.trainNumber}<br/> 
@@ -21,7 +23,7 @@ class Trains extends Component {
 
             <br/>
             
-            Arrival Station: {this.props.shortNameToLongName(this.props.allStationsNames, joinInfo.arrival.stationShortCode)}  <br/>
+            
             Arrival time: {moment(joinInfo.arrival.scheduledTime).calendar()} <br/>
             Weather: {this.props.arrivalWeather.main.temp}<br/>
             Laituri: {joinInfo.arrival.commercialTrack}<br/> 
