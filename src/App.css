@@ -7,50 +7,45 @@ body {
   font-family: "Open Sans", serif;
 }
 
-.wrapper {
-  background: url("img/Ohjaamovaunu.jpg") center center no-repeat;
-  height: 100vh;
+.background {
+  background: #44415c;
+  /* height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
-.main {
+.container.testi {
+  
   height: 90vh;
   background: rgb(255, 255, 255, 0,2);
   box-shadow: 0px 13px 40px -13px rgba(0,0,0,0.75);
-  width: 50%;
-  margin: 0 auto;
+  width: 100%;
+  background: url("Components/img/Ohjaamovaunu.jpg") center center no-repeat;
+  background-repeat: no-repeat;
+  /* text-align: center; */
 }
 
-
-.title-container__title {
-  font-size: 50px;
-  letter-spacing: 2px;
-  line-height: 1.3;
-  font-family: 'Roboto Slab', serif;
- 
-  
-}
-
-.form-container {
+/* .form-container {
   height: 90vh;
   padding-top: 100px;
   padding-left: 50px;
-}
+} */
+
 
 input[type="text"] {
   background-color: transparent;
   border: 0;
   border-bottom: solid 1px #0bae02;
-  width: 30%;
-  padding-bottom: 4px;
+  width: 15%;
+  padding-bottom: 2px;
   color: rgb(18, 7, 37);
   font-weight: lighter;
   letter-spacing: 2px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   margin-right: 20px;
   font-size: 20px;
+  text-align: center;
 }
 
 input[type="text"] { 
@@ -88,12 +83,21 @@ button:active {
   letter-spacing: 2px;
 }
 
-.scheduled__key {
+.route__key {
   color: #0bae02;
   /* border-bottom: solid 2px rgba(211, 32, 32, 0.06); */
   padding: 20px 40 20px 0;
-  font-weight: 1000;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 25px;
+  text-shadow:1px 1px #0a9202;
+}
+.route__key span {
+  padding-right: 10px;
+}
+
+.arrow {
+  width: 5%;
+ 
 }
 
 .scheduled__key:last-child {
@@ -103,6 +107,7 @@ button:active {
 .scheduled__value {
   color: rgb(0, 0, 0);
   font-weight: 200;
+  
 }
 
 .weather__error {
@@ -111,3 +116,67 @@ button:active {
   letter-spacing: 1px;
   font-weight: 200;
 }
+
+.row {
+  background: rgb(255, 255, 255, 0.7);
+  width: 90%;
+  margin: auto;
+  border-radius: 25px;
+}
+
+.row.size {
+  margin-top: 17px;
+}
+.row.yla {
+  background: rgb(255, 255, 255, 0);
+
+}
+.row.keski {
+  background: rgb(255, 255, 255, 0);
+
+}
+.row.keski2 {
+  background: rgb(255, 255, 255, 0);
+
+}
+
+/* _____________________________________________________SÄÄTIEDOT_______________________________________________________________________________ */
+
+.weather_box {
+  height: 5vh;
+  margin-top: 0%;
+  text-align: right;
+  margin-right:5%; 
+  
+
+}
+
+.city__weather {
+  color: #44415c;
+  /* border-bottom: solid 2px rgba(211, 32, 32, 0.06); */
+  padding: 20px 40 20px 0;
+  font-weight: 1000;
+  font-size: 15px;
+}
+
+.city__weather span {
+  padding-left: 10px;
+}
+
+/* _____________________________________________________________KELLO_________________________________________________________________________________ */
+.clock__box{
+  float: left;
+  margin-left: 0%;
+
+}
+
+
+.clock__style {
+  color: #44415c;
+  /* border-bottom: solid 2px rgba(211, 32, 32, 0.06); */
+  padding: 20px 40 20px 0;
+  font-weight: 1000;
+  font-size: 15px;
+}
+
+

@@ -12,6 +12,7 @@ class Map2 extends Component {
                      initialCenter={{
                          lat: 60.205067,
                          lng: 24.655992
+                         
                      }}
 
                      
@@ -20,8 +21,8 @@ class Map2 extends Component {
                 
 
                      style={{
-                         width: "460px",
-                         height: "50%",
+                         width: "20%",
+                         height: "40%",
                         position: "relative",
                          display: "inline-block",
                          overflow: "hidden"
@@ -31,10 +32,6 @@ class Map2 extends Component {
 
                 <Marker onClick={this.onMarkerClick}
                         name={'Current location'} />
-
-                {/*<InfoWindow onClose={this.onInfoWindowClose}>*/}
-
-                {/*</InfoWindow>*/}
             </Map>
                 </div>
 

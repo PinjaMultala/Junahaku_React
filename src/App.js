@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
-import Trains from "./Components/Trains";
+import Scheduled from "./Components/Scheduled";
 import Map2 from "./Components/Map2";
 import RouteTitle from "./Components/RouteTitle";
+import Weather from "./Components/Weather";
+import Clock from "./Components/Clock";
 
 
 
@@ -17,7 +19,11 @@ class App extends Component {
     city: "",
     allTrains: [],
     allStations: [],
-    allStationsNames: []
+    allStationsNames: [],
+    departureWeather: [],
+    depCordinate: [],
+    arrCordinate:[],
+    
   };
  
 componentDidMount = async () => { //käynnistyy heti
@@ -37,13 +43,15 @@ componentDidMount = async () => { //käynnistyy heti
     // täällä muutetaan longname --> short name
     const departureShortname = this.longNameToShortName(this.state.allStationsNames, this.state.departure)
     const arrivalShortname = this.longNameToShortName(this.state.allStationsNames, this.state.arrival)
+    //koordinaatit
+    const departureCordinate = this.cordinates(this.state.allStationsNames, departureShortname)
+    const arrivalCordinate = this.cordinates(this.state.allStationsNames, arrivalShortname)
+
 
     // const weatherCity = this.shortNameToLongName(this.state.allStationsNames, this.state.departure)
-    
-    console.log("SÄÄTIETO: helsinki", this.state.departure)
-    console.log("MISSÄ TÄMÄ ON", this.longNameToShortName(this.state.allStationsNames, this.state.arrival))
-    console.log("departure",this.longNameToShortName(this.state.allStationsNames, this.state.departure))
-    console.log("arrival", this.longNameToShortName(this.state.allStationsNames, this.state.arrival))
+    console.log("arrivalCordinate",arrivalCordinate)
+    console.log("departureCordinate", departureCordinate)
+  
 
     const api_call1 = await fetch(
         `https://rata.digitraffic.fi/api/v1/live-trains/station/${departureShortname}/${arrivalShortname}` // hakee kaikki junat jotka kulevat läpi halutun lähtöaseman ja saapuu haluttuun määränpähän.
@@ -68,6 +76,8 @@ componentDidMount = async () => { //käynnistyy heti
         allStations: data2,
         departureWeather: data4,
         arrivalWeather: data5,
+        depCordinate: departureCordinate,
+        arrCordinate: arrivalCordinate,
         error: ""
       });
     }
@@ -118,7 +128,7 @@ compare = (allTrains, allStations) =>{  //functio
 //_____________KAIVETAAN INFOA ALLTRAIN DATASTA TIMETABLEROWSIN ALTA. ETSITÄÄN ARRIVAL JA DEPARTURE ASEMAT. LUODAAN 2 ARRAYTA JOTKA JOINATAAN YHDEKSI ARRAYKSI (joinInfo)_____________________ 
    
 infoDetail = (allTrains) => {
-    console.log("alltrains",allTrains)
+    console.log("alltrains",this.state.allTrains)
       const info = [];
      
 
@@ -177,6 +187,7 @@ longNameToShortName = (_allStationsNames, longName) => {
 
           if(namelist.stationName.toUpperCase().includes(longName.toUpperCase())){ // helsinki asema = helsinki
 
+
             return namelist.stationShortCode;
         
         }
@@ -187,6 +198,7 @@ longNameToShortName = (_allStationsNames, longName) => {
 
     shortNameToLongName = (_allStationsNames, _shortName) => {
 
+
       for (var z = 0; z < _allStationsNames.length; z++) {
         const namelist = _allStationsNames[z];
   
@@ -196,63 +208,120 @@ longNameToShortName = (_allStationsNames, longName) => {
         
         }
       }
+      
     }
 
-   // _____________________________________________________________________________________________________________________________________________________________________________________________________
-       
+//_________________________________________________________HAETAAN KOORDINAATTEJA___________________________________________________________________________________
 
-  
+
+cordinates = (___allStationsNames,  __shortName) => {
+console.log("cordinate", ___allStationsNames)
+console.log("shortname", __shortName)
+
+  for (var p = 0; p < ___allStationsNames.length; p++) {
+    const latitudeCordinate = ___allStationsNames[p];
+
+    if(latitudeCordinate.stationShortCode === __shortName){
+
+      return { //laitetaan objectiin.
+        latitude: latitudeCordinate.latitude,
+        longitude: latitudeCordinate.longitude
+      };
+    }
+  }
+}
+
+
+
+
+
+
 
   render() {
     const haku = this.infoDetail (this.state.allTrains)
     const trainToDestination = this.compare(this.state.allTrains, this.state.allStations) // otetaan function palautus kiinni ja talletetaan muuttujaan
+    // const mapCordinates = this.cordinates (this.state.allStationsNames, this.state.departure)
    
    
     
-    console.log("MITÄ TÄMÄ TULOSTAA?", this.stationShortCodeArrival)
-
+  
+// console.log("koordinaatit", mapCordinates)
     console.log ("VÄLIHAKU", haku)
    console.log("MISSÄ", trainToDestination) 
 
    
     
     return (
-      <div>
-
-        <div className="wrapper">
-          <div className="main">
-            <div className="container">
-              <div className="row">
+      <div className="background">
+<div className="container testi">
 
 
-        <h1>HAE JUNIA</h1>
+<div className="row yla">
+
+  <div className= "col-4">
+      <Clock />
+      </div>
+
+      <div className="col-2 empty"></div>
+
+      <div className="col-6">
+      <Weather
+      data={haku} // mappays
+      allStationsNames={this.state.allStationsNames}// Lähtöasema
+      shortNameToLongName={this.shortNameToLongName} // muuntaa lyhenteet pitkiksi nimiksi
+      departureWeather={this.state.departureWeather} // lähtöaseman sää
+      arrivalWeather={this.state.arrivalWeather}
+      departureShortname = {this.departureShortname}
+      departure= {this.state.departure}
+      />
+    </div>
+ 
+</div>
+
+
+<div className="row keski">
         <input type="text" onChange={this.handleChangeDeparture} />
         <input type="text" onChange={this.handleChangeArrival} />
         <button onClick={this.getTrainData}>HAE</button>
+</div>
 
-        {/* haetaan departure statesta. */}
+
+<div className="row keski2">
+     
         <RouteTitle
-          data={haku} // mappays
-          allStationsNames={this.state.allStationsNames}// Lähtöasema
-          shortNameToLongName={this.shortNameToLongName} // muuntaa lyhenteet pitkiksi nimiksi
-          departureWeather={this.state.departureWeather} // lähtöaseman sää
-          arrivalWeather={this.state.arrivalWeather}/>
+         data={haku} // mappays
+         allStationsNames={this.state.allStationsNames}// Lähtöasema
+         shortNameToLongName={this.shortNameToLongName} // muuntaa lyhenteet pitkiksi nimiksi
+         departureWeather={this.state.departureWeather} // lähtöaseman sää
+         arrivalWeather={this.state.arrivalWeather}
+         departureShortname = {this.departureShortname}
+         departure= {this.state.departure}
         
-        
-        <Trains 
+        />
+
+</div>
+
+<div className="row">
+     
+        <Scheduled 
         data={haku} // mappays
         allStationsNames={this.state.allStationsNames}// Lähtöasema
         shortNameToLongName={this.shortNameToLongName} // muuntaa lyhenteet pitkiksi nimiksi
         departureWeather={this.state.departureWeather} // lähtöaseman sää
         arrivalWeather={this.state.arrivalWeather}
         />
+</div>       
+
+      <div>
+     
+        <Map2/>
+
+         </div>
+        
+       </div>
+       </div>
+     
       
-         {/* <Map2/> */}
-       </div>
-       </div>
-       </div>
-       </div>
-      </div>
     );
   }
 }
