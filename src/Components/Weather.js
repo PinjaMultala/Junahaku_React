@@ -13,7 +13,7 @@ class Weather extends Component {
 
     if(this.props.departureWeather && this.props.departureWeather.main){
       departureWeather = this.props.departureWeather.main.temp;
-      celsius= <p>c</p>
+      celsius= "°C"
     }
     if(this.props.arrivalWeather && this.props.arrivalWeather.main){
       arrivalWeather = this.props.arrivalWeather.main.temp;

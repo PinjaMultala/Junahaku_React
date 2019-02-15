@@ -27,6 +27,7 @@ class Trains extends Component {
         <div className=" col-2">
             {joinInfo.departure.commuterLineID}
         </div>
+      
     </div>
       );
     });

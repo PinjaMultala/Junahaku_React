@@ -5,6 +5,7 @@ import Map2 from "./Components/Map2";
 import RouteTitle from "./Components/RouteTitle";
 import Weather from "./Components/Weather";
 import Clock from "./Components/Clock";
+import ScheduledCategories from "./Components/ScheduledCategories";
 
 
 
@@ -49,7 +50,7 @@ componentDidMount = async () => { //käynnistyy heti
 
 
     // const weatherCity = this.shortNameToLongName(this.state.allStationsNames, this.state.departure)
-    console.log("arrivalCordinate",arrivalCordinate)
+    console.log("arrivalCordinate",arrivalCordinate.latitude)
     console.log("departureCordinate", departureCordinate)
   
 
@@ -301,6 +302,14 @@ console.log("shortname", __shortName)
 
 </div>
 
+        <ScheduledCategories
+          data={haku} // mappays
+          allStationsNames={this.state.allStationsNames}// Lähtöasema
+          shortNameToLongName={this.shortNameToLongName} // muuntaa lyhenteet pitkiksi nimiksi
+          departureWeather={this.state.departureWeather} // lähtöaseman sää
+          arrivalWeather={this.state.arrivalWeather}
+          />
+
 <div className="row">
      
         <Scheduled 
@@ -310,13 +319,16 @@ console.log("shortname", __shortName)
         departureWeather={this.state.departureWeather} // lähtöaseman sää
         arrivalWeather={this.state.arrivalWeather}
         />
-</div>       
+      
 
-      <div>
+      <div className= "mapStyle">
      
-        <Map2/>
+        {/* <Map2
+        arrivalCordinates={this.state.arrCordinate}
+        departureCordinates={this.state.depCordinate}/> */}
 
          </div>
+         </div> 
         
        </div>
        </div>
