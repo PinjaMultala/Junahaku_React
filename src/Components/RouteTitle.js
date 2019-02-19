@@ -18,10 +18,10 @@ class RouteTitle extends Component {
 
 
          return (
-           <div>
-           
+           <div className= "row routeTitle">
+         
          <span className="route__key">
-       
+  
            <span>
             {departurePrint}  
            </span> 
@@ -38,7 +38,7 @@ class RouteTitle extends Component {
           
           {/* <img src={arrow}/> */}
            {/* {this.props.shortNameToLongName(this.props.allStationsNames, joinInfo.arrival.stationShortCode)}  </p> */}
-            
+      
            </div>
          );
          

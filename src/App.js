@@ -10,7 +10,7 @@ import ScheduledCategories from "./Components/ScheduledCategories";
 
 
 
-const API_KEY = "";
+const API_KEY = "c67e5bdd523adc49ff8810e2278fe0ea";
 
 
 class App extends Component {
@@ -25,7 +25,7 @@ class App extends Component {
     departureWeather: [],
     depCordinate: [],
     arrCordinate:[],
-    startEndPoints:[]
+    
     
   };
  
@@ -50,12 +50,12 @@ componentDidMount = async () => { //käynnistyy heti
     const departureCordinate = this.cordinates(this.state.allStationsNames, departureShortname)
     const arrivalCordinate = this.cordinates(this.state.allStationsNames, arrivalShortname)
 
-    const startEndPoints = this.startEndPointStations(this.state.allTrains, departureShortname) //?
+    
 
     // const weatherCity = this.shortNameToLongName(this.state.allStationsNames, this.state.departure)
     console.log("arrivalCordinate",arrivalCordinate.latitude)
     console.log("departureCordinate", departureCordinate)
-    console.log("StartEndPoints!!",this.state.startEndPoints.startEndPoints)
+    
   
 
     const api_call1 = await fetch(
@@ -146,7 +146,17 @@ infoDetail = (allTrains) => {
         for( var j = 0; j < train.timeTableRows.length; j++) {
           const timeTableRow = train.timeTableRows[j];
           
-
+          
+          
+          if(j === 0){
+            const shortCode = train.timeTableRows[j].stationShortCode;
+            joinInfo.startStation = this.shortNameToLongName(this.state.allStationsNames, shortCode)
+          }
+          if(j === train.timeTableRows.length - 1){
+            const endStation = train.timeTableRows[j].stationShortCode;
+            joinInfo.endStation = this.shortNameToLongName(this.state.allStationsNames, endStation)
+          }
+          
           if(timeTableRow.stationShortCode === this.longNameToShortName(this.state.allStationsNames, this.state.departure) && timeTableRow.trainStopping === true){
        
             const departureInfo = {
@@ -217,26 +227,6 @@ longNameToShortName = (_allStationsNames, longName) => {
       
     }
 
-    //__________________________________________________________________TESTI_________________________________________________________________________________________________
-    startEndPointStations = (allStations, ____shortname) => {
-
-      console.log("AllStations!",allStations)
-    
-      for(var r = 0; r < allStations.length; r++) {
-        const train = allStations[r];
-    
-        for( var w = 0; w < train.timeTableRows.length; w++) {
-          const timeTableRow = train.timeTableRows[w];
-    
-          if(timeTableRow === ____shortname){
-            return {
-              startPoint: timeTableRow[0].stationShortCode
-            };
-          }
-        }
-      }
-      
-    }
 
 //_________________________________________________________HAETAAN KOORDINAATTEJA___________________________________________________________________________________
 
@@ -315,8 +305,10 @@ console.log("shortname", __shortName)
 </div>
 
 
-<div className="row keski2">
-     
+    
+<div className="row keski2"> 
+<div className="col-8 empty"></div>
+      <div className="col-3 routeTitleMargin">
         <RouteTitle
          data={haku} // mappays
          allStationsNames={this.state.allStationsNames}// Lähtöasema
@@ -327,8 +319,14 @@ console.log("shortname", __shortName)
          departure= {this.state.departure}
         
         />
-
+      </div>
+      <div className="col-1 empty"></div>
 </div>
+
+
+
+
+
 
         <ScheduledCategories
           data={haku} // mappays
@@ -337,6 +335,11 @@ console.log("shortname", __shortName)
           departureWeather={this.state.departureWeather} // lähtöaseman sää
           arrivalWeather={this.state.arrivalWeather}
           />
+        
+
+
+
+
 
 <div className="row">
      
@@ -349,7 +352,7 @@ console.log("shortname", __shortName)
         />
       
 
-      <div className= "mapStyle">
+     
      
         <Map2
         arrivalCordinates={this.state.arrCordinate}
@@ -361,7 +364,7 @@ console.log("shortname", __shortName)
         departure= {this.state.departure}
         />
 
-         </div>
+        
          </div> 
         
        </div>

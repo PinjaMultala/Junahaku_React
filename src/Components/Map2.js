@@ -48,9 +48,9 @@ class Map2 extends Component {
                          }}
 
                      style={{
-                         width: "30%",
-                         height: "40%",
-                        position: "relative",
+                         width: "31.2%",
+                         height: "65%",
+                        //  position: "relative",
                          display: "inline-block",
                          overflow: "hidden"    
                      }}
@@ -100,5 +100,5 @@ class Map2 extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ("")
+    apiKey: ("AIzaSyAMS7KDIoQx4jeJHpI6ABzATONYloNkcAA")
 })(Map2)

@@ -88,7 +88,7 @@ button:active {
   /* border-bottom: solid 2px rgba(211, 32, 32, 0.06); */
   padding: 20px 40 20px 0;
   font-weight: 400;
-  font-size: 25px;
+  font-size: 20px;
   text-shadow:1px 1px #0a9202;
 }
 .route__key span {
@@ -119,13 +119,15 @@ button:active {
 
 .row {
   background: rgb(255, 255, 255, 0.7);
-  width: 90%;
+  width: 100%;
   margin: auto;
-  border-radius: 25px;
+  /* border-radius: 25px; */
 }
 
 .row.size {
+ 
   margin-top: 17px;
+  
 }
 .row.yla {
   background: rgb(255, 255, 255, 0);
@@ -138,6 +140,9 @@ button:active {
 .row.keski2 {
   background: rgb(255, 255, 255, 0);
 
+}
+.row.scheduledCategories{
+  background: rgb(255, 255, 255, 0,2);
 }
 
 /* _____________________________________________________SÄÄTIEDOT_______________________________________________________________________________ */
@@ -179,3 +184,40 @@ button:active {
   font-size: 15px;
 }
 
+/* _______________________________________________scroll */
+
+.scroll {
+  overflow: scroll;
+}
+
+/* ___________________________________________________________________________________________________ */
+.startStation{
+  padding-left: 15px;
+  font-weight: bold;
+}
+.dep{
+  padding-left: 25px; 
+  width: 50%;
+  font-weight: bold;
+
+}
+.arr{
+  padding-left: 23px; 
+  width: 50%;
+  font-weight: bold;
+}
+
+.trainNor{
+  padding-left: 2px; 
+  font-weight: bold;
+}
+.endStation{
+  padding-left: 8px;
+  font-weight: bold;
+}
+
+.routeTitleMargin{
+  margin-left: 45px;
+  margin-top: 0%
+  
+}
