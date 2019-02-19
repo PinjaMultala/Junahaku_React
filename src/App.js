@@ -10,10 +10,11 @@ import ScheduledCategories from "./Components/ScheduledCategories";
 
 
 
-const API_KEY = "c67e5bdd523adc49ff8810e2278fe0ea";
+const API_KEY = "";
 
 
 class App extends Component {
+  
   state = {
     departure: "", // departure tallennetaan stateen
     arrival: "",
@@ -24,6 +25,7 @@ class App extends Component {
     departureWeather: [],
     depCordinate: [],
     arrCordinate:[],
+    startEndPoints:[]
     
   };
  
@@ -48,10 +50,12 @@ componentDidMount = async () => { //käynnistyy heti
     const departureCordinate = this.cordinates(this.state.allStationsNames, departureShortname)
     const arrivalCordinate = this.cordinates(this.state.allStationsNames, arrivalShortname)
 
+    const startEndPoints = this.startEndPointStations(this.state.allTrains, departureShortname)
 
     // const weatherCity = this.shortNameToLongName(this.state.allStationsNames, this.state.departure)
     console.log("arrivalCordinate",arrivalCordinate.latitude)
     console.log("departureCordinate", departureCordinate)
+    console.log("StartEndPoints!!",this.state.startEndPoints.startEndPoints)
   
 
     const api_call1 = await fetch(
@@ -84,7 +88,7 @@ componentDidMount = async () => { //käynnistyy heti
     }
   };
 
-  //_________________AETETAAN HAKUKENTTIEN ARVOT________________________________________________
+  //_________________HAETETAAN HAKUKENTTIEN ARVOT________________________________________________
   handleChangeDeparture = e => {
     //tallettaa "muuttujaan" formiin kirjoitettu e.target.value
     const muuttuja = e.target.value;
@@ -138,6 +142,7 @@ infoDetail = (allTrains) => {
 
         const joinInfo = {}
 
+       
         for( var j = 0; j < train.timeTableRows.length; j++) {
           const timeTableRow = train.timeTableRows[j];
           
@@ -212,6 +217,27 @@ longNameToShortName = (_allStationsNames, longName) => {
       
     }
 
+    //__________________________________________________________________TESTI_________________________________________________________________________________________________
+    startEndPointStations = (allStations, ____shortname) => {
+
+      console.log("AllStations!",allStations)
+    
+      for(var r = 0; r < allStations.length; r++) {
+        const train = allStations[r];
+    
+        for( var w = 0; w < train.timeTableRows.length; w++) {
+          const timeTableRow = train.timeTableRows[w];
+    
+          if(timeTableRow === ____shortname){
+            return {
+              startPoint: timeTableRow[0].stationShortCode
+            };
+          }
+        }
+      }
+      
+    }
+
 //_________________________________________________________HAETAAN KOORDINAATTEJA___________________________________________________________________________________
 
 
@@ -242,6 +268,7 @@ console.log("shortname", __shortName)
     const haku = this.infoDetail (this.state.allTrains)
     const trainToDestination = this.compare(this.state.allTrains, this.state.allStations) // otetaan function palautus kiinni ja talletetaan muuttujaan
     // const mapCordinates = this.cordinates (this.state.allStationsNames, this.state.departure)
+    
    
    
     
@@ -249,6 +276,7 @@ console.log("shortname", __shortName)
 // console.log("koordinaatit", mapCordinates)
     console.log ("VÄLIHAKU", haku)
    console.log("MISSÄ", trainToDestination) 
+
 
    
     
@@ -323,9 +351,15 @@ console.log("shortname", __shortName)
 
       <div className= "mapStyle">
      
-        {/* <Map2
+        <Map2
         arrivalCordinates={this.state.arrCordinate}
-        departureCordinates={this.state.depCordinate}/> */}
+        departureCordinates={this.state.depCordinate}
+        data={haku} // mappays
+        allStationsNames={this.state.allStationsNames}// Lähtöasema
+        shortNameToLongName={this.shortNameToLongName} // muuntaa lyhenteet pitkiksi nimiksi
+        departureShortname = {this.departureShortname}
+        departure= {this.state.departure}
+        />
 
          </div>
          </div> 

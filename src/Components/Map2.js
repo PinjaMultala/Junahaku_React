@@ -13,6 +13,11 @@ class Map2 extends Component {
 
         let departureLatitude;
         let departureLongitude;
+
+        let departurePrint;
+        let arrivalPrint;
+        let map;
+ 
       
 
         if(this.props.arrivalCordinates){
@@ -22,9 +27,6 @@ class Map2 extends Component {
             arrivalLongitude = this.props.arrivalCordinates.longitude
         }
 
-
-
-
         if(this.props.departureCordinates){
             departureLatitude = this.props.departureCordinates.latitude 
         }
@@ -32,6 +34,39 @@ class Map2 extends Component {
             departureLongitude = this.props.departureCordinates.longitude
         }
     
+
+        if(this.props.data && this.props.allStationsNames && this.props.data[0] && this.props.data[0].departure){
+            departurePrint = this.props.shortNameToLongName(this.props.allStationsNames, this.props.data[0].departure.stationShortCode)
+          }
+          if(this.props.data && this.props.allStationsNames && this.props.data[0] && this.props.data[0].arrival){
+            arrivalPrint = this.props.shortNameToLongName(this.props.allStationsNames, this.props.data[0].arrival.stationShortCode)
+            
+            map=<Map google={this.props.google}
+                     initialCenter={{
+                         lat: 65.01236, //oulu
+                         lng: 25.46816
+                         }}
+
+                     style={{
+                         width: "30%",
+                         height: "40%",
+                        position: "relative",
+                         display: "inline-block",
+                         overflow: "hidden"    
+                     }}
+                        zoom={4}>
+                    <Marker
+                     title = {departurePrint}
+                     position={{lat:departureLatitude, lng:departureLongitude}}
+                     />
+                    <Marker
+                     title = {arrivalPrint}
+                     position={{lat:arrivalLatitude, lng:arrivalLongitude}}
+                     />
+                    
+                   </Map>
+          }
+      
       
       
       
@@ -45,45 +80,11 @@ class Map2 extends Component {
 
 
             
-            <div className="Map2">
+        
                 <div>
-                <Map google={this.props.google}
-                     initialCenter={{
-                         lat: 65.01236, //oulu
-                         lng: 25.46816
-                         
-                     }}
+                
 
-                     
-            
-                     style={{
-                         width: "30%",
-                         height: "40%",
-                        position: "relative",
-                         display: "inline-block",
-                         overflow: "hidden"
-                         
-                     }}
-
-                     zoom={4}>
-
-                    <Marker
-                     title = {'NAKKILA'}
-                     position={{lat:departureLatitude, lng:departureLongitude}}
-                     />
-
-                     <Marker
-                     title = {'ARRIVAL'}
-                     position={{lat:arrivalLatitude, lng:arrivalLongitude}}
-                     />
-                    
-                   
-
-
-               
-            </Map>
-
-            
+            {map}
  
                         
 
@@ -91,7 +92,6 @@ class Map2 extends Component {
 
 
 
-            </div>
 
 
 
@@ -100,5 +100,5 @@ class Map2 extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: 
+    apiKey: ("")
 })(Map2)

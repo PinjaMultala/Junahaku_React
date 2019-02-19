@@ -21,6 +21,7 @@ class RouteTitle extends Component {
            <div>
            
          <span className="route__key">
+       
            <span>
             {departurePrint}  
            </span> 
@@ -30,6 +31,7 @@ class RouteTitle extends Component {
            <span>
             {arrivalPrint} 
            </span>
+          
          </span>
 
           
