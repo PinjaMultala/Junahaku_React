@@ -50,7 +50,7 @@ componentDidMount = async () => { //käynnistyy heti
     const departureCordinate = this.cordinates(this.state.allStationsNames, departureShortname)
     const arrivalCordinate = this.cordinates(this.state.allStationsNames, arrivalShortname)
 
-    const startEndPoints = this.startEndPointStations(this.state.allTrains, departureShortname)
+    const startEndPoints = this.startEndPointStations(this.state.allTrains, departureShortname) //?
 
     // const weatherCity = this.shortNameToLongName(this.state.allStationsNames, this.state.departure)
     console.log("arrivalCordinate",arrivalCordinate.latitude)
