@@ -10,7 +10,7 @@ import ScheduledCategories from "./Components/ScheduledCategories";
 
 
 
-const API_KEY = "c67e5bdd523adc49ff8810e2278fe0ea";
+const API_KEY = "";
 
 
 class App extends Component {

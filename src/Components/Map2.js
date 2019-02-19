@@ -100,5 +100,5 @@ class Map2 extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyAMS7KDIoQx4jeJHpI6ABzATONYloNkcAA")
+    apiKey: ("")
 })(Map2)
