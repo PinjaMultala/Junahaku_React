@@ -304,29 +304,7 @@ console.log("shortname", __shortName)
         <button onClick={this.getTrainData}>HAE</button>
 </div>
 
-
-    
-<div className="row keski2"> 
-<div className="col-8 empty"></div>
-      <div className="col-3 routeTitleMargin">
-        <RouteTitle
-         data={haku} // mappays
-         allStationsNames={this.state.allStationsNames}// Lähtöasema
-         shortNameToLongName={this.shortNameToLongName} // muuntaa lyhenteet pitkiksi nimiksi
-         departureWeather={this.state.departureWeather} // lähtöaseman sää
-         arrivalWeather={this.state.arrivalWeather}
-         departureShortname = {this.departureShortname}
-         departure= {this.state.departure}
-        
-        />
-      </div>
-      <div className="col-1 empty"></div>
-</div>
-
-
-
-
-
+<div className="row space"></div>
 
         <ScheduledCategories
           data={haku} // mappays

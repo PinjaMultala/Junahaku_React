@@ -48,7 +48,7 @@ class Map2 extends Component {
                          }}
 
                      style={{
-                         width: "31.2%",
+                         width: "18.2%",
                          height: "65%",
                         //  position: "relative",
                          display: "inline-block",
